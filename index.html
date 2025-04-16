@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">⚠️ Fraud Detection System</div>
+            <div class="menu">
+                <button class="tab-button active" onclick="showSection('dashboard')">Dashboard</button>
+                <button class="tab-button" onclick="showSection('add-transaction')">Add Transaction</button>
+                <button class="tab-button" onclick="showSection('all-transactions')">All Transactions</button>
+                <button class="tab-button" onclick="showSection('high-risk')">High Risk</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Transactions</h3>
+                    <p id="total-transactions">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Alerts</h3>
+                    <p id="active-alerts">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Monitored Users</h3>
+                    <p id="monitored-users">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>High Risk Cases</h3>
+                    <p id="high-risk-cases">0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Recent Transactions</h2>
+                </div>
+                <table id="recent-transactions">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Amount</th>
+                            <th>Location</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Recent Alerts</h2>
+                </div>
+                <div id="alerts-container"></div>
+            </div>
+        </section>
+
+        <!-- Add Transaction Section -->
+        <section id="add-transaction" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Add New Transaction</h2>
+                </div>
+                <form id="transaction-form" class="form-grid" onsubmit="addTransaction(event)">
+                    <div class="form-group">
+                        <label for="txn-id">Transaction ID</label>
+                        <input type="text" id="txn-id" required pattern="TXN\d{3,}" title="Must start with TXN followed by at least 3 numbers">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-id">User ID</label>
+                        <input type="text" id="user-id" required pattern="USER\d{3,}" title="Must start with USER followed by at least 3 numbers">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount (₹)</label>
+                        <input type="number" id="amount" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" required>
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <button type="submit" class="button">Add Transaction</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- All Transactions Section -->
+        <section id="all-transactions" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>All Transactions</h2>
+                </div>
+                <table id="all-transactions-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Amount</th>
+                            <th>Location</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- High Risk Section -->
+        <section id="high-risk" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>High Risk Transactions</h2>
+                </div>
+                <table id="high-risk-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Amount</th>
+                            <th>Location</th>
+                            <th>Time</th>
+                            <th>Risk Factors</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
